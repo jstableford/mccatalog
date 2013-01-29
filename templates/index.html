@@ -1,0 +1,13 @@
+<html>
+<head><title>Minecraft Catalog</title></head>
+<body>
+{% if list_of_items %}
+{% for item in list_of_items %}
+<br>
+{{ item.item_name }}, {{ item.item_symbol }}, {{ item.item_id }}
+{% endfor %}
+{% else %}
+No list available
+{% endif %}
+</body>
+</html>
