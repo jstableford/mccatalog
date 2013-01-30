@@ -1,13 +1,20 @@
 <html>
 <head><title>Minecraft Catalog</title></head>
 <body>
+	<h2>Here's a flat list of items</h2>
 {% if list_of_items %}
 {% for item in list_of_items %}
 <br>
-{{ item.item_name }}, {{ item.item_symbol }}, {{ item.item_id }}
+{{ item.item_name }}, {{ item.item_symbol }}, {{ item.item }},  {{ item.id }}
 {% endfor %}
 {% else %}
 No list available
 {% endif %}
+<br><hr><h2>Here's a dictionary of items and their counts</h2>
+{% for key, value in dic.items %}
+<table border="1"  color='black'>
+<tr><td>{{key}}</td><td>{{value}}</td></tr>
+{% endfor %}
+</table>
 </body>
 </html>
