@@ -24,7 +24,21 @@ def home(request):
 				'dic': dic,})
 	return HttpResponse(t.render(c))
 
-#def getQuanBySymbol(request, sym_id):
+def getQuanBySymbol(request):
+	if request.method == 'GET':
+		q = request.GET
+	elif request.method == 'POST':
+		q = request.POST
+	sym = q.__getitem__('sym')
+	testprefix = "\nThe quantity is: "	
+	query = Quantity.objects.filter(item__item_symbol__exact=sym)
+	return HttpResponse(query.values_list()[0][4])
 
-#	query = Quantity.objects.filter(item__item_symbol__exact=sym)
-#	return HttpResponse(query.values_list()[0][4])
+def updateQuanBySymbol(request):
+	if request.method == 'GET':
+		q = request.GET
+	elif request.method == 'POST':
+		q = request.POST
+	sym = q.__getitem__('sym')
+	num = q.__getitem__('num')
+# code to come

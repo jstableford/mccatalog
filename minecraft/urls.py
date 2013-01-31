@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'minecraft.views.home', name='home'),
     # url(r'^minecraft/', include('minecraft.foo.urls')),
 	url(r'^$', 'mccatalog.views.home', name='home'),
-	url(r'^query/', mccatalog.views.getQuanBySymbol, name='query'),
+	url(r'^query/', 'mccatalog.views.getQuanBySymbol', name='query'),
+	url(r'^put/', 'mccatalog.views.updateQuanBySymbol', name='put'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
