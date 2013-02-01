@@ -2,7 +2,7 @@ from django.db import models
 
 class Item(models.Model):
 	item_name = models.CharField(max_length=200)
-	item_symbol = models.CharField(max_length=5)
+	item_symbol = models.CharField(max_length=5) #, primary_key=True, unique=True)
 	item_id = models.CharField(max_length=20)
 	def __unicode__(self):
 		return self.item_name

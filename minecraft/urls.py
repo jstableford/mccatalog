@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^$', 'mccatalog.views.home', name='home'),
 	url(r'^query/', 'mccatalog.views.getQuanBySymbol', name='query'),
 	url(r'^put/', 'mccatalog.views.updateQuanBySymbol', name='put'),
+	url(r'^add/', 'mccatalog.views.addSymbol', name='put'),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

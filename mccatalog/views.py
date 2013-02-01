@@ -46,4 +46,23 @@ def updateQuanBySymbol(request):
 		q = request.POST
 	sym = q.__getitem__('sym')
 	num = q.__getitem__('num')
-# code to come
+	item = Quantity.objects.filter(item__item_symbol__exact=sym)
+	item.values('quan').update(quan=num)
+	return HttpResponse()
+	
+def addSymbol(request):
+	if request.method == 'GET':
+		q = request.GET
+	elif request.method == 'POST':
+		q = request.POST
+	sym = q.__getitem__('sym')
+	name = q.__getitem__('name')
+	iid = q.__getitem__('iid')
+	this_item = Item(item_name=name, item_symbol=sym, item_id=iid)
+	try:
+		this_item.save()
+		quantity = Quantity(maxq=100, minq=1, item=this_item, quan=0)
+		quantity.save()
+	except NameError:
+		return HttpResponse()
+	return HttpResponse()
