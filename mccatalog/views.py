@@ -16,9 +16,7 @@ def home(request):
 	for item in list_of_items:
 		name = item.item_name
 		quantity = getQuan(name)
-		dic[name] = quantity
-
-	
+		dic[name] = quantity	
 	t = loader.get_template('index.html')
 	c = Context({'list_of_items': list_of_items,
 				'dic': dic,})
@@ -31,8 +29,15 @@ def getQuanBySymbol(request):
 		q = request.POST
 	sym = q.__getitem__('sym')
 	testprefix = "\nThe quantity is: "	
-	query = Quantity.objects.filter(item__item_symbol__exact=sym)
-	return HttpResponse(query.values_list()[0][4])
+	query = cache.get( sym )
+	if query:
+		return HttpResponse(query.values_list()[0][4])
+	try:
+		query = Quantity.objects.filter(item__item_symbol__exact=sym)
+		cache.set( sym, query, settings.CACHE_TIMEOUT )
+		return HttpResponse(query.values_list()[0][4])		
+	except IndexError:
+		return HttpResponse()
 
 def updateQuanBySymbol(request):
 	if request.method == 'GET':
